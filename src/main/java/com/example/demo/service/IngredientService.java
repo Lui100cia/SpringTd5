@@ -1,13 +1,19 @@
 package com.example.demo.service;
 
+import org.springframework.stereotype.Service;
+import java.util.List;
+
 import com.example.demo.entity.Ingredient;
 import com.example.demo.repository.IngredientRepository;
 
-import java.util.List;
 @Service
 public class IngredientService {
-    @Autowired
-    private IngredientRepository repository;
+
+    private final IngredientRepository repository;
+
+    public IngredientService(IngredientRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Ingredient> getAll() {
         return repository.findAll();

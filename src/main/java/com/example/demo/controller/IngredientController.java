@@ -1,9 +1,23 @@
 package com.example.demo.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+
+import com.example.demo.entity.Ingredient;
+import com.example.demo.entity.StockResponse;
+import com.example.demo.service.IngredientService;
+
 @RestController
 @RequestMapping("/ingredients")
 public class IngredientController {
-    @Autowired
-    private IngredientService service;
+
+    private final IngredientService service;
+
+    public IngredientController(IngredientService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<Ingredient> getAll() {
@@ -33,13 +47,11 @@ public class IngredientController {
         }
 
         try {
-            Ingredient ingredient = service.getById(id);
+            service.getById(id);
 
-            Map<String, Object> result = new HashMap<>();
-            result.put("unit", unit);
-            result.put("value", 100);
-
-            return ResponseEntity.ok(result);
+            return ResponseEntity.ok(
+                    new StockResponse(unit, 100) // simulation
+            );
 
         } catch (Exception e) {
             return ResponseEntity.status(404)

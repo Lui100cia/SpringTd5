@@ -1,11 +1,19 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
 import java.util.List;
 
+@Entity
 public class Dish {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private Double price;
+
+    @ManyToMany
     private List<Ingredient> ingredients;
 
     public Long getId() {
