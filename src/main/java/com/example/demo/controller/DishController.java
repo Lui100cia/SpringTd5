@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Dish;
+import com.example.demo.entity.Ingredient;
+import com.example.demo.service.DishService;
 
 import java.util.List;
 
@@ -10,13 +12,13 @@ public class DishController {
     @Autowired
     private DishService service;
 
-    // d) GET /dishes
+
     @GetMapping
     public List<Dish> getAll() {
         return service.getAll();
     }
 
-    // e) PUT /dishes/{id}/ingredients
+
     @PutMapping("/{id}/ingredients")
     public ResponseEntity<?> updateIngredients(
             @PathVariable Long id,

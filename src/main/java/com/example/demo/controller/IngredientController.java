@@ -5,13 +5,11 @@ public class IngredientController {
     @Autowired
     private IngredientService service;
 
-    // a) GET /ingredients
     @GetMapping
     public List<Ingredient> getAll() {
         return service.getAll();
     }
 
-    // b) GET /ingredients/{id}
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         try {
@@ -22,7 +20,6 @@ public class IngredientController {
         }
     }
 
-    // c) GET /ingredients/{id}/stock
     @GetMapping("/{id}/stock")
     public ResponseEntity<?> getStock(
             @PathVariable Long id,
@@ -40,7 +37,7 @@ public class IngredientController {
 
             Map<String, Object> result = new HashMap<>();
             result.put("unit", unit);
-            result.put("value", 100); // simulation stock
+            result.put("value", 100);
 
             return ResponseEntity.ok(result);
 
